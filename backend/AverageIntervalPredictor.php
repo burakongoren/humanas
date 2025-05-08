@@ -31,16 +31,8 @@ require_once 'LoginPredictor.php';
  * 3. Düzensiz login alışkanlıkları olan kullanıcılarda yanılma payı yüksek
  */
 class AverageIntervalPredictor extends LoginPredictor {
-    /**
-     * Ortalama login aralığı (saat)
-     */
     private $averageInterval;
     
-    /**
-     * Constructor
-     * 
-     * @param array $loginDates DateTime nesnelerinden oluşan dizi
-     */
     public function __construct(array $loginDates) {
         parent::__construct($loginDates);
         $this->calculateAverageInterval();
@@ -86,20 +78,10 @@ class AverageIntervalPredictor extends LoginPredictor {
         return $nextLoginDate;
     }
     
-    /**
-     * Sınıfın adını döndür
-     * 
-     * @return string Algoritma adı
-     */
     public function getName(): string {
         return "Basit Ortalama Aralık Yöntemi";
     }
     
-    /**
-     * Algoritmanın nasıl çalıştığını açıklayan açıklamayı döndür
-     * 
-     * @return string Algoritma açıklaması
-     */
     public function getDescription(): string {
         return "Bu algoritma, kullanıcının login'leri arasındaki ortalama süreyi (saat cinsinden) hesaplar " .
                "ve son login zamanına bu süreyi ekleyerek bir sonraki tahmini login zamanını belirler. " .
@@ -107,12 +89,7 @@ class AverageIntervalPredictor extends LoginPredictor {
                "tahminler üretebilir. Ancak hafta içi/hafta sonu farklarını dikkate almaz ve düzensiz " .
                "login davranışlarında yanılma payı yüksektir.";
     }
-    
-    /**
-     * Tahmin ile ilgili ek bilgileri döndür (HTML biçiminde)
-     * 
-     * @return string Ek bilgiler (HTML)
-     */
+
     public function getAdditionalInfo(): string {
         $lastLogin = $this->getLastLogin();
         
